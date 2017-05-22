@@ -1246,7 +1246,7 @@ unsigned int max_task_load(void)
 }
 
 /* Use this knob to turn on or off HMP-aware task placement logic */
-unsigned int __read_mostly sched_enable_hmp = 0;
+unsigned int __read_mostly sched_enable_hmp = 1;
 
 /* A cpu can no longer accomodate more tasks if:
  *
@@ -1267,7 +1267,7 @@ unsigned int __read_mostly sysctl_sched_mostly_idle_nr_run = 3;
  * Control whether or not individual CPU power consumption is used to
  * guide task placement.
  */
-unsigned int __read_mostly sched_enable_power_aware = 0;
+unsigned int __read_mostly sched_enable_power_aware = 1;
 
 /*
  * This specifies the maximum percent power difference between 2
@@ -1300,7 +1300,7 @@ unsigned int __read_mostly sysctl_sched_spill_load_pct = 100;
  * sched_small_task are considered as small tasks.
  */
 unsigned int __read_mostly sched_small_task;
-unsigned int __read_mostly sysctl_sched_small_task_pct = 60;
+unsigned int __read_mostly sysctl_sched_small_task_pct = 30;
 
 /*
  * Tasks with demand >= sched_heavy_task will have their
@@ -1321,7 +1321,7 @@ unsigned int __read_mostly sched_heavy_task;
  * capacity.
  */
 unsigned int __read_mostly sched_upmigrate;
-unsigned int __read_mostly sysctl_sched_upmigrate_pct = 95;
+unsigned int __read_mostly sysctl_sched_upmigrate_pct = 93;
 
 /*
  * Big tasks, once migrated, will need to drop their bandwidth
@@ -1329,7 +1329,7 @@ unsigned int __read_mostly sysctl_sched_upmigrate_pct = 95;
  * migrated.
  */
 unsigned int __read_mostly sched_downmigrate;
-unsigned int __read_mostly sysctl_sched_downmigrate_pct = 85;
+unsigned int __read_mostly sysctl_sched_downmigrate_pct = 83;
 
 /*
  * Tasks whose nice value is > sysctl_sched_upmigrate_min_nice are never
@@ -1351,7 +1351,7 @@ unsigned int __read_mostly sysctl_sched_prefer_idle;
  * ended up with their load characteristics. Any entity enabling
  * boost is responsible for disabling it as well.
  */
-unsigned int sysctl_sched_boost;
+unsigned int sysctl_sched_boost = 0;
 
 static inline int available_cpu_capacity(int cpu)
 {
