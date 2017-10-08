@@ -1665,6 +1665,12 @@
 		};
 	};
 
+	qcom,msm-thermal-simple {
+		compatible = "qcom,msm-thermal-simple";
+		qcom,thermal-vadc = <&pm8916_vadc>;
+		qcom,adc-channel = <117>; /* LR_MUX6_PU1_AMUX_THM3 */
+	};
+
 	qcom,memshare {
 		compatible = "qcom,memshare";
 
