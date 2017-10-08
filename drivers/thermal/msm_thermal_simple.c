@@ -29,9 +29,9 @@
 #include <linux/qpnp/qpnp-adc.h>
 #include <linux/slab.h>
 
-/* For MSM8996 */
-#define LITTLE_CPU_ID	0
-#define BIG_CPU_ID	2
+/* For MSM8916 */
+#define LITTLE_CPU_ID	4
+#define BIG_CPU_ID	0
 
 #define DEFAULT_SAMPLING_MS 3000
 
