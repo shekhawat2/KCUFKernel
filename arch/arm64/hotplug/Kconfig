@@ -8,3 +8,9 @@ config AiO_HotPlug
 	    Efficient in terms of CPU and Battery Consumption. Moreover, as the 
 	    name indicates, this HotPlug provides absolute flexibility in terms 
 	    of usage.
+
+config ALUCARD_HOTPLUG
+	bool "Enable alucard-hotplug cpu hotplug driver"
+	default y
+	help
+	Generic Alucard-hotplug cpu hotplug driver for ARM SOCs
