@@ -4795,7 +4795,7 @@ limHandleDelBssInReAssocContext(tpAniSirGlobal pMac, tpDphHashNode pStaDs,tpPESe
                 mlmReassocCnf.protStatusCode = eSIR_MAC_UNSPEC_FAILURE_STATUS;
                 limDeleteDphHashEntry(pMac, psessionEntry->bssId,
                                       DPH_STA_HASH_INDEX_PEER, psessionEntry);
-                goto Error;
+            goto Error;
             }
             /** Delete the older STA Table entry */
             limDeleteDphHashEntry(pMac, psessionEntry->bssId, DPH_STA_HASH_INDEX_PEER, psessionEntry);
@@ -4811,7 +4811,7 @@ limHandleDelBssInReAssocContext(tpAniSirGlobal pMac, tpDphHashNode pStaDs,tpPESe
                 mlmReassocCnf.resultCode = eSIR_SME_RESOURCES_UNAVAILABLE;
                 mlmReassocCnf.protStatusCode = eSIR_SME_SUCCESS;
                 vos_mem_vfree(pBeaconStruct);
-                goto Error;
+            goto Error;
             }
             /** While Processing the ReAssoc Response Frame the ReAssocRsp Frame
             *   is being stored to be used here for sending ADDBSS
@@ -4826,11 +4826,11 @@ limHandleDelBssInReAssocContext(tpAniSirGlobal pMac, tpDphHashNode pStaDs,tpPESe
               psessionEntry->pLimReAssocReq->bssDescription.length),
               pBeaconStruct);
             if(pMac->lim.gLimProtectionControl != WNI_CFG_FORCE_POLICY_PROTECTION_DISABLE)
-                limDecideStaProtectionOnAssoc(pMac, pBeaconStruct, psessionEntry);
-                if(pBeaconStruct->erpPresent) {
-                if (pBeaconStruct->erpIEInfo.barkerPreambleMode)
+               limDecideStaProtectionOnAssoc(pMac, pBeaconStruct, psessionEntry);
+            if(pBeaconStruct->erpPresent) {
+            if (pBeaconStruct->erpIEInfo.barkerPreambleMode)
                     psessionEntry->beaconParams.fShortPreamble = 0;
-                else
+            else
                     psessionEntry->beaconParams.fShortPreamble = 1;
             }
             //updateBss flag is false, as in this case, PE is first deleting the existing BSS and then adding a new one.
@@ -4846,7 +4846,7 @@ limHandleDelBssInReAssocContext(tpAniSirGlobal pMac, tpDphHashNode pStaDs,tpPESe
                 vos_mem_free(assocRsp);
                 vos_mem_vfree(pBeaconStruct);
                 pMac->lim.gLimAssocResponseData = NULL;
-                goto Error;
+            goto Error;
             }
             vos_mem_free(assocRsp);
             vos_mem_vfree(pBeaconStruct);

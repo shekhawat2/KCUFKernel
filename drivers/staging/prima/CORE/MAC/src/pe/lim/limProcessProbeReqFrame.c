@@ -167,14 +167,14 @@ void limRemovePBCSessions(tpAniSirGlobal pMac, tSirMacAddr pRemoveMac,tpPESessio
     tSirWPSPBCSession *pbc, *prev = NULL;
     prev = pbc = psessionEntry->pAPWPSPBCSession;
 
-    while (pbc) {
+        while (pbc) {
         if (vos_mem_compare((tANI_U8 *)pbc->addr,
                             (tANI_U8 *)pRemoveMac, sizeof(tSirMacAddr))) {
-          prev->next = pbc->next;
-          if (pbc == psessionEntry->pAPWPSPBCSession)
-            psessionEntry->pAPWPSPBCSession = pbc->next;
-            vos_mem_free(pbc);
-            return;
+        prev->next = pbc->next;
+        if (pbc == psessionEntry->pAPWPSPBCSession)
+        psessionEntry->pAPWPSPBCSession = pbc->next;
+        vos_mem_free(pbc);
+        return;
         }
         prev = pbc;
         pbc = pbc->next;
@@ -227,9 +227,9 @@ static void limUpdatePBCSessionEntry(tpAniSirGlobal pMac,
             vos_mem_compare((tANI_U8 *)pbc->uuid_e, (tANI_U8 *)uuid_e, SIR_WPS_UUID_LEN)) {
             if (prev)
                 prev->next = pbc->next;
-            else
+        else
                 psessionEntry->pAPWPSPBCSession = pbc->next;
-            break;
+           break;
         }
         prev = pbc;
         pbc = pbc->next;
@@ -240,7 +240,7 @@ static void limUpdatePBCSessionEntry(tpAniSirGlobal pMac,
         if ( NULL == pbc )
         {
             PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
-            return;
+        return;
         }
         vos_mem_copy((tANI_U8 *)pbc->addr, (tANI_U8 *)addr, sizeof(tSirMacAddr));
     

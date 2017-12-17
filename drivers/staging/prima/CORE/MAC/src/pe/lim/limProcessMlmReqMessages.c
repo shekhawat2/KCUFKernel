@@ -3849,11 +3849,11 @@ tLimMlmRemoveKeyCnf  mlmRemoveKeyCnf;
     * peer entity for which keys need to be removed.
     */
   pStaDs = dphLookupHashEntry( pMac, pMlmRemoveKeyReq->peerMacAddr, &aid, &psessionEntry->dph.dphHashTable );
-  if ((pStaDs == NULL) ||
-         (pStaDs &&
-         (pStaDs->mlmStaContext.mlmState !=
-                       eLIM_MLM_LINK_ESTABLISHED_STATE)))
-  {
+    if ((pStaDs == NULL) ||
+           (pStaDs &&
+           (pStaDs->mlmStaContext.mlmState !=
+                         eLIM_MLM_LINK_ESTABLISHED_STATE)))
+    {
      /**
        * Received LIM_MLM_REMOVEKEY_REQ for STA
        * that does not have context or in some
@@ -3869,8 +3869,8 @@ tLimMlmRemoveKeyCnf  mlmRemoveKeyCnf;
       
 
       goto end;
-  }
-  else
+    }
+    else
     staIdx = pStaDs->staIndex;
   
 
@@ -3923,7 +3923,7 @@ limProcessMinChannelTimeout(tpAniSirGlobal pMac)
     if((psessionEntry = peFindSessionBySessionId(pMac, pMac->lim.limTimers.gLimMinChannelTimer.sessionId))== NULL) 
     {
         limLog(pMac, LOGP,FL("Session Does not exist for given sessionID"));
-        return;
+    return;
     }
 #endif
 
