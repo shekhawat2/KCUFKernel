@@ -88,6 +88,17 @@ struct cpu_data {
 	bool cctoggle;
 };
 
+int gswitch;
+#ifdef CONFIG_AiO_HotPlug
+extern int AiO_HotPlug;
+#endif
+#ifdef CONFIG_ALUCARD_HOTPLUG
+extern int alucard;
+#endif
+#ifdef CONFIG_CORE_CONTROL
+extern int core_control;
+#endif
+
 static DEFINE_PER_CPU(struct cpu_data, cpu_state);
 static DEFINE_SPINLOCK(state_lock);
 static DEFINE_SPINLOCK(pending_lru_lock);
@@ -444,7 +455,21 @@ static ssize_t store_cctoggle(struct cpu_data *state,
        if (kstrtouint(buf, 0, &val))
                 return -EINVAL;
 
+#ifdef CONFIG_AiO_HotPlug
+	if (AiO_HotPlug)
+		return -EINVAL;
+#endif
+#ifdef CONFIG_ALUCARD_HOTPLUG
+	if (alucard)
+                return -EINVAL;
+#endif
+#ifdef CONFIG_CORE_CONTROL
+	if (core_control)
+                return -EINVAL;
+#endif
+
 	val = !!val;
+	gswitch = val;
 
 	if (state->cctoggle == val)
 
