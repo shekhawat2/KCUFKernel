@@ -55,6 +55,16 @@ static struct workqueue_struct *AiO_wq;
 
 int AiO_HotPlug;
 
+#ifdef CONFIG_CORE_CONTROL
+extern int core_control;
+#endif
+#ifdef CONFIG_ALUCARD_HOTPLUG
+extern int alucard;
+#endif
+#ifdef CONFIG_MSM_CORE_CTL
+extern int gswitch;
+#endif
+
 static void __ref AiO_HotPlug_work(struct work_struct *work)
 {
          // Operations for a Traditional Quad-Core SoC.
@@ -279,6 +289,15 @@ static ssize_t store_toggle(struct kobject *kobj,
 	ret = sscanf(buf, "%u", &val);
 	if (ret != 1 || val < 0 || val > 1)
 	   return -EINVAL;
+
+#ifdef CONFIG_ALUCARD_HOTPLUG
+	if (alucard)
+	   return -EINVAL;
+#endif
+#ifdef CONFIG_MSM_CORE_CTL
+	if (!gswitch)
+           return -EINVAL;
+#endif
 
 	if (val == AiO.toggle)
 	   return count;

@@ -69,6 +69,15 @@ int LEVEL_HOT 		= _temp_threshold + _temp_step;
 bool core_control = true;
 static struct kobject *cc_kobj;
 #endif
+#ifdef CONFIG_AiO_HotPlug
+extern int AiO_HotPlug;
+#endif
+#ifdef CONFIG_ALUCARD_HOTPLUG
+extern int alucard;
+#endif
+#ifdef CONFIG_MSM_CORE_CTL
+extern int gswitch;
+#endif
 
 #if (NR_CPUS == 6 || NR_CPUS == 8)	// Assume Hexa/Octa-Core SoCs to be based on big.LITTLE architecture.
 // Permission to Disable Core 0 Toggle.
@@ -446,7 +455,15 @@ static ssize_t __ref store_cc_enabled(struct kobject *kobj, struct kobj_attribut
 	   pr_err("Invalid input %s. err:%d\n", buf, ret);
 	   goto done_store_cc;
 	}
-	
+
+#ifdef CONFIG_ALUCARD_HOTPLUG
+	if (alucard)
+		core_control = !!val;
+#endif
+#ifdef CONFIG_MSM_CORE_CTL
+	if (!gswitch)
+		core_control = !!val;
+#endif
 
 	if (core_control == !!val)
 	   goto done_store_cc;
